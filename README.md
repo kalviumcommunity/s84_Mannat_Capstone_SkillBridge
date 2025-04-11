@@ -31,60 +31,60 @@
 
 📍**Week 1: Setup & Planning**
 
-DAY_1 - Initialize GitHub repo with README, set up GitHub Projects & Issues board
-DAY_2 - Initialize backend (Node.js + Express) & test local server
-DAY_3 - Setup MongoDB with Mongoose, create initial schema (e.g., User)
-DAY_4 - Implement GET and POST APIs (basic CRUD for users)
-DAY_5 - Implement PUT API (update user profile), connect frontend/backend
-DAY_6 - Initialize React frontend using Vite
-DAY_7 - Setup basic routing and component structure (Navbar, Auth Pages)
+- DAY_1 - Initialize GitHub repo with README, set up GitHub Projects & Issues board
+- DAY_2 - Initialize backend (Node.js + Express) & test local server
+- DAY_3 - Setup MongoDB with Mongoose, create initial schema (e.g., User)
+- DAY_4 - Implement GET and POST APIs (basic CRUD for users)
+- DAY_5 - Implement PUT API (update user profile), connect frontend/backend
+- DAY_6 - Initialize React frontend using Vite
+- DAY_7 - Setup basic routing and component structure (Navbar, Auth Pages)
 
 📍**Week 2: Authentication & User System**
 
-DAY_8 - Setup password-based authentication (JWT, bcrypt)
-DAY_9 - Create login/signup UI components
-DAY_10 - Test JWT-based login & protected routes (Frontend + Backend)
-DAY_11 - Setup 3rd-party auth (Google OAuth via Passport.js or Firebase)
-DAY_12 - Create user dashboard skeleton based on role
-DAY_13 - Deploy backend server (Render/Railway)
-DAY_14 - Deploy frontend (Vercel/Netlify), connect with backend
+- DAY_8 - Setup password-based authentication (JWT, bcrypt)
+- DAY_9 - Create login/signup UI components
+- DAY_10 - Test JWT-based login & protected routes (Frontend + Backend)
+- DAY_11 - Setup 3rd-party auth (Google OAuth via Passport.js or Firebase)
+- DAY_12 - Create user dashboard skeleton based on role
+- DAY_13 - Deploy backend server (Render/Railway)
+- DAY_14 - Deploy frontend (Vercel/Netlify), connect with backend
 
 📍**Week 3: Core Features – Jobs, Matching, Profile**
 
-DAY_15 - Create Job schema/model with relevant fields
-DAY_16 - Implement GET/POST jobs API for recruiter
-DAY_17 - Build job posting UI and job listing on dashboard
-DAY_18 - Implement skill-based matching (basic algorithm)
-DAY_19 - Add apply to job (Candidate) + view applicants (Recruiter)
-DAY_20 - Implement entity relationships in MongoDB (User ↔ Jobs)
-DAY_21 - Design profile page UI, allow users to update info (PUT API)
+- DAY_15 - Create Job schema/model with relevant fields
+- DAY_16 - Implement GET/POST jobs API for recruiter
+- DAY_17 - Build job posting UI and job listing on dashboard
+- DAY_18 - Implement skill-based matching (basic algorithm)
+- DAY_19 - Add apply to job (Candidate) + view applicants (Recruiter)
+- DAY_20 - Implement entity relationships in MongoDB (User ↔ Jobs)
+- DAY_21 - Design profile page UI, allow users to update info (PUT API)
 
 📍**Week 4: Testing, Uploads, Bruno, UI Polish**
 
-DAY_22 - Implement file upload (resume/profile image via Multer/Cloudinary)
-DAY_23 - Use Postman + Bruno to update/test all API templates
-DAY_24 - Write 5+ unit tests using Jest (backend or frontend)
-DAY_25 - Style key pages (Auth, Dashboard, Jobs) with Tailwind
-DAY_26 - Ensure frontend matches design mockups (Figma reference)
-DAY_27 - Add JWT logic to frontend routes, token expiry handling
-DAY_28 - Mid-project review, fix bugs, refactor components
+- DAY_22 - Implement file upload (resume/profile image via Multer/Cloudinary)
+- DAY_23 - Use Postman + Bruno to update/test all API templates
+- DAY_24 - Write 5+ unit tests using Jest (backend or frontend)
+- DAY_25 - Style key pages (Auth, Dashboard, Jobs) with Tailwind
+- DAY_26 - Ensure frontend matches design mockups (Figma reference)
+- DAY_27 - Add JWT logic to frontend routes, token expiry handling
+- DAY_28 - Mid-project review, fix bugs, refactor components
 
 📍**Week 5: Upskilling + AI Integration**
 
-DAY_29 - Build upskilling hub UI: learning cards, links, videos
-DAY_30 - Add tracking of completed content (DB + UI)
-DAY_31 - Begin LLM/AI autocomplete (for skill suggestions or matching text)
-DAY_32 - Integrate OpenAI or similar for autocomplete/search assistant
-DAY_33 - Finalize AI feature + test thoroughly
-DAY_34 - Implement Dockerfile for backend app
-DAY_35 - Test and run the app inside Docker container (with Mongo or volumes)
+- DAY_29 - Build upskilling hub UI: learning cards, links, videos
+- DAY_30 - Add tracking of completed content (DB + UI)
+- DAY_31 - Begin LLM/AI autocomplete (for skill suggestions or matching text)
+- DAY_32 - Integrate OpenAI or similar for autocomplete/search assistant
+- DAY_33 - Finalize AI feature + test thoroughly
+- DAY_34 - Implement Dockerfile for backend app
+- DAY_35 - Test and run the app inside Docker container (with Mongo or volumes)
 
 📍**Week 6: Finalization + Proofs + Outreach**
 
-DAY_36 - Get project used by 5+ users (share/test)
-DAY_37 - Get project used by 10+ users (gather feedback)
-DAY_38 - Receive at least 3 pull requests (have someone contribute)
-DAY_39 - Submit 1+ PR to an open-source repo (proof + screenshot)
-DAY_40 - Polish UI, fix responsive issues, animation tweaks
-DAY_41 - Final project documentation, README update, screen record walkthrough
+- DAY_36 - Get project used by 5+ users (share/test)
+- DAY_37 - Get project used by 10+ users (gather feedback)
+- DAY_38 - Receive at least 3 pull requests (have someone contribute)
+- DAY_39 - Submit 1+ PR to an open-source repo (proof + screenshot)
+- DAY_40 - Polish UI, fix responsive issues, animation tweaks
+- DAY_41 - Final project documentation, README update, screen record walkthrough
 
