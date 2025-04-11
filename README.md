@@ -69,7 +69,7 @@ DAY_26 - Ensure frontend matches design mockups (Figma reference)
 DAY_27 - Add JWT logic to frontend routes, token expiry handling
 DAY_28 - Mid-project review, fix bugs, refactor components
 
-📍**Week 5: Upskilling + AI Integration
+📍**Week 5: Upskilling + AI Integration**
 
 DAY_29 - Build upskilling hub UI: learning cards, links, videos
 DAY_30 - Add tracking of completed content (DB + UI)
