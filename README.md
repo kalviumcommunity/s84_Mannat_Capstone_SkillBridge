@@ -18,11 +18,11 @@
 
 ### SkillBridge – Tech Stack
 
-**Frontend :** React.js, Tailwind CSS, Axios
-**Backend :** Node.js, MongoDB, JWT
-**DevOps / Deployment :** Netlify / Vercel, Render / Heroku
-**UI/UX Design :** Figma
-**API Testing & Documentation :** Bruno / Postman
+- **Frontend :** React.js, Tailwind CSS, Axios
+- **Backend :** Node.js, MongoDB, JWT
+- **DevOps / Deployment :** Netlify / Vercel, Render / Heroku
+- **UI/UX Design :** Figma
+- **API Testing & Documentation :** Bruno / Postman
 
 ---
 
