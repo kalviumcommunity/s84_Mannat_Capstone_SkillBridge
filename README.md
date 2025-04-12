@@ -1,4 +1,4 @@
-### s84_Mannat_Capstone_SkillBridge
+### **s84_Mannat_Capstone_SkillBridge**
 
 --- 
 
@@ -16,7 +16,7 @@
 
 ---  
 
-### SkillBridge – Tech Stack
+### **SkillBridge – Tech Stack**
 
 - **Frontend :** React.js, Tailwind CSS, Axios
 - **Backend :** Node.js, MongoDB, JWT
@@ -26,7 +26,7 @@
 
 ---
 
-### SkillBridge – 6-Week Day-Wise Project Planner
+### **SkillBridge – 6-Week Day-Wise Project Planner**
 
 
 📍**Week 1: Setup & Planning**
