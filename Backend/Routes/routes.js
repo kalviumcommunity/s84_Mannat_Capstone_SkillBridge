@@ -26,4 +26,35 @@ router.post('/user', async (req, res) => {
 });
 
 
+router.put('/user/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { fullname, email, phoneNumber, role } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            { fullname, email, phoneNumber, role },
+            { new: true }
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ 
+                error: 'User not found', 
+                success: false 
+            });
+        }
+        res.status(200).json({ 
+            message: 'User updated successfully', 
+            success: true, 
+            user: updatedUser 
+        });
+    } 
+    
+    catch (err) {
+        res.status(500).json({ 
+            error: 'Server error', 
+            success: false 
+        });
+    }
+});
+
+
 module.exports = router;
