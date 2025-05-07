@@ -88,3 +88,5 @@
 - DAY_40 - Polish UI, fix responsive issues, animation tweaks
 - DAY_41 - Final project documentation, README update, screen record walkthrough
 
+
+Backend deployment link - https://s84-mannat-capstone-skillbridge.onrender.com
