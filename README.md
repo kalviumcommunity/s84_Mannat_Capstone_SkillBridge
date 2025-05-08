@@ -89,4 +89,6 @@
 - DAY_41 - Final project documentation, README update, screen record walkthrough
 
 
-Backend deployment link - https://s84-mannat-capstone-skillbridge.onrender.com
+## Deployment
+
+Server - https://s84-mannat-capstone-skillbridge.onrender.com
