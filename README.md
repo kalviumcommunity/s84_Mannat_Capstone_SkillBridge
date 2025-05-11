@@ -92,3 +92,4 @@
 ## Deployment
 
 Server - https://s84-mannat-capstone-skillbridge.onrender.com
+Clint - https://s84-mannat-skillbridge.netlify.app/
