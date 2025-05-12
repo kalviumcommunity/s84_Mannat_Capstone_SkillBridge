@@ -1,14 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
-const userRoute = require('./Routes/routes');
+
+const userRoute = require('./Routes/userRoutes');
+const authRoute = require('./Routes/authRoutes');
 const User = require('./Models/userModel');
 const Job = require('./Models/jobModel');
 
+const app = express();
 app.use(express.json());
 
-require('dotenv').config();
 
+require('dotenv').config();
 const port = process.env.PORT || 9090;
 
 mongoose.connect(process.env.MONGO_URI)
@@ -21,6 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 app.use('/route', userRoute);
+app.use('/route/auth', authRoute);
 
 app.get('/', (req,res)=>{
     res.send("This is home route..!");
