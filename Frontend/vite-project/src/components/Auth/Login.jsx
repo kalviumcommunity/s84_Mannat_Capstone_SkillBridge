@@ -1,0 +1,120 @@
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import './Auth.css';
+
+const Login = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      // Here you would typically make an API call to your backend
+      // For now, we'll simulate a successful login
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      login({ email: formData.email }); // Set the user in context
+      navigate('/dashboard'); // Redirect to dashboard after login
+    } catch (error) {
+      console.error('Login failed:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    // Add Google login logic here
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-content">
+          <h2>Welcome Back</h2>
+          <p className="auth-subtitle">Continue your professional journey with SkillBridge</p>
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email"
+                required
+              />
+              <div className="form-highlight"></div>
+            </div>
+
+            <div className="form-group">
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Password"
+                required
+              />
+              <div className="form-highlight"></div>
+            </div>
+
+            <div className="form-options">
+              <label className="remember-me">
+                <input type="checkbox" />
+                <span>Remember me</span>
+              </label>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot Password?
+              </Link>
+            </div>
+
+            <button type="submit" className="auth-button" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
+            </button>
+
+            <div className="auth-divider">
+              <span>or</span>
+            </div>
+
+            <button
+              type="button"
+              className="google-auth-button"
+              onClick={handleGoogleLogin}
+            >
+              <img src="/google-icon.svg" alt="Google" />
+              Continue with Google
+            </button>
+          </form>
+
+          <p className="auth-switch">
+            New to SkillBridge?{' '}
+            <Link to="/signup">Create an account</Link>
+          </p>
+        </div>
+
+        <div className="auth-decoration">
+          <div className="skill-orbs">
+            <div className="skill-orb"></div>
+            <div className="skill-orb"></div>
+            <div className="skill-orb"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login; 
