@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import api from '../../services/api';
 import './Auth.css';
 
 const Signup = () => {
@@ -11,16 +12,36 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'jobseeker' // or 'employer'
+    role: 'jobseeker',
+    code: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [codeSent, setCodeSent] = useState(false);
+  const [sendingCode, setSendingCode] = useState(false);
+  const [codeMsg, setCodeMsg] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleSendCode = async (e) => {
+    e.preventDefault();
+    setSendingCode(true);
+    setCodeMsg('');
+    setError('');
+    try {
+      await api.post('/auth/send-code', { email: formData.email });
+      setCodeSent(true);
+      setCodeMsg('Verification code sent to your email.');
+    } catch (err) {
+      setError(err?.response?.data?.error || 'Failed to send verification code.');
+    } finally {
+      setSendingCode(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -36,7 +57,8 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: formData.role
+        role: formData.role,
+        code: formData.code
       });
       navigate('/dashboard');
     } catch (err) {
@@ -69,6 +91,7 @@ const Signup = () => {
           <p className="auth-subtitle">Connect with opportunities that match your true potential</p>
 
           {error && <div className="auth-error">{error}</div>}
+          {codeMsg && <div className="auth-success">{codeMsg}</div>}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
@@ -83,13 +106,34 @@ const Signup = () => {
               <div className="form-highlight"></div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group" style={{ display: 'flex', gap: '8px' }}>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
+                required
+                style={{ flex: 1 }}
+              />
+              <button
+                type="button"
+                className="auth-button"
+                style={{ width: 'auto', padding: '0 1rem', minWidth: 'fit-content' }}
+                onClick={handleSendCode}
+                disabled={sendingCode || !formData.email}
+              >
+                {sendingCode ? 'Sending...' : codeSent ? 'Resend Code' : 'Send Code'}
+              </button>
+            </div>
+
+            <div className="form-group">
+              <input
+                type="text"
+                name="code"
+                value={formData.code}
+                onChange={handleChange}
+                placeholder="Verification Code"
                 required
               />
               <div className="form-highlight"></div>

@@ -5,24 +5,50 @@ const User = require('../Models/userModel');
 const { isValidGmail } = require('../Utils/emailValidator');
 const sendEmail = require('../Utils/sendEmail');
 
-const signup = async (req, res) => {
-    try {
-        const fullname = req.body.fullname || req.body.name;
-        const { email, phoneNumber = '', password, role = 'jobseeker' } = req.body;
+// In-memory store for verification codes (for dev/demo)
+const verificationCodes = {};
 
-        // Gmail validation using utility
+const sendVerificationCode = async (req, res) => {
+    try {
+        const { email } = req.body;
         if (!isValidGmail(email)) {
             return res.status(400).json({ error: 'Please use a valid Gmail address.' });
         }
-
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(409).json({ error: 'Email already in use' });
         }
+        // Generate a 6-digit code
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        verificationCodes[email] = code;
+        // Send the code via email
+        await sendEmail(
+            email,
+            'Your SkillBridge Verification Code',
+            `<p>Your verification code is: <b>${code}</b></p>`
+        );
+        res.json({ message: 'Verification code sent to your email.' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
+const signup = async (req, res) => {
+    try {
+        const fullname = req.body.fullname || req.body.name;
+        const { email, phoneNumber = '', password, role = 'jobseeker', code } = req.body;
+
+        if (!isValidGmail(email)) {
+            return res.status(400).json({ error: 'Please use a valid Gmail address.' });
+        }
+        if (!code || verificationCodes[email] !== code) {
+            return res.status(400).json({ error: 'Invalid or missing verification code.' });
+        }
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(409).json({ error: 'Email already in use' });
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const verificationToken = crypto.randomBytes(32).toString('hex');
-
         const newUser = await User.create({
             fullname,
             email,
@@ -30,21 +56,21 @@ const signup = async (req, res) => {
             password: hashedPassword,
             role,
             profile: {},
-            verified: false,
-            verificationToken
+            verified: true,
+            verificationToken: undefined
         });
-
-        // Send verification email
-        const verifyUrl = `http://localhost:5000/route/auth/verify-email?token=${verificationToken}`;
-        await sendEmail(
-            email,
-            'Verify your SkillBridge account',
-            `<p>Click the link to verify your account:</p><a href="${verifyUrl}">${verifyUrl}</a>`
+        // Remove the code after successful signup
+        delete verificationCodes[email];
+        // Generate token for the new user
+        const token = jwt.sign(
+            { id: newUser._id, email: newUser.email, role: newUser.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
         );
-
-        res.status(201).json({ message: 'User created successfully. Please check your email to verify your account.' });
-    } 
-    catch (error) {
+        const userObj = newUser.toObject();
+        delete userObj.password;
+        res.status(201).json({ message: 'User created and verified successfully', token, user: userObj });
+    } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
@@ -98,4 +124,4 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { signup, login, verifyEmail };
+module.exports = { signup, login, verifyEmail, sendVerificationCode };
