@@ -6,7 +6,7 @@ import './Auth.css';
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { signup } = useAuth();
+  const { signup, loginWithGoogle } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -72,8 +72,17 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSignup = () => {
-    // Add Google signup logic here
+  const handleGoogleSignup = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      await loginWithGoogle();
+      navigate('/dashboard');
+    } catch (error) {
+      setError(error.message || 'Failed to sign up with Google');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -195,6 +204,7 @@ const Signup = () => {
               type="button"
               className="google-auth-button"
               onClick={handleGoogleSignup}
+              disabled={isLoading}
             >
               <img src="/google-icon.svg" alt="Google" />
               Sign up with Google

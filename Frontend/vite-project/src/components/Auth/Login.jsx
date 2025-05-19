@@ -5,7 +5,7 @@ import './Auth.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -38,8 +38,17 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // Add Google login logic here
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      await loginWithGoogle();
+      navigate('/dashboard');
+    } catch (error) {
+      setError(error.message || 'Failed to login with Google');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
