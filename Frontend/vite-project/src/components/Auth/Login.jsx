@@ -7,6 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -23,11 +24,9 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      // Here you would typically make an API call to your backend
-      // For now, we'll simulate a successful login
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      login({ email: formData.email }); // Set the user in context
-      navigate('/dashboard'); // Redirect to dashboard after login
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      login(formData);
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
@@ -49,6 +48,17 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
               <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Full Name"
+                required
+              />
+              <div className="form-highlight"></div>
+            </div>
+            <div className="form-group">
+              <input
                 type="email"
                 name="email"
                 value={formData.email}
@@ -58,7 +68,6 @@ const Login = () => {
               />
               <div className="form-highlight"></div>
             </div>
-
             <div className="form-group">
               <input
                 type="password"
@@ -89,19 +98,14 @@ const Login = () => {
               <span>or</span>
             </div>
 
-            <button
-              type="button"
-              className="google-auth-button"
-              onClick={handleGoogleLogin}
-            >
+            <button onClick={handleGoogleLogin} className="google-auth-button">
               <img src="/google-icon.svg" alt="Google" />
               Continue with Google
             </button>
           </form>
 
           <p className="auth-switch">
-            New to SkillBridge?{' '}
-            <Link to="/signup">Create an account</Link>
+            Don't have an account? <Link to="/signup">Sign up</Link>
           </p>
         </div>
 

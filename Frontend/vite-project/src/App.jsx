@@ -5,6 +5,8 @@ import Login from './components/Auth/Login'
 import Signup from './components/Auth/Signup'
 import Dashboard from './components/Dashboard/Dashboard'
 import Footer from './components/Footer/Footer'
+import Learning from './components/Learning/Learning'
+import Profile from './components/Profile/Profile'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
 import './App.css'
@@ -28,6 +30,11 @@ function App() {
                 <Dashboard />
               </ProtectedRoute>
             } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            } />
             <Route path="/features" element={
               <ProtectedRoute>
                 <div>Features Page</div>
@@ -40,7 +47,7 @@ function App() {
             } />
             <Route path="/learn" element={
               <ProtectedRoute>
-                <div>Learning Hub</div>
+                <Learning />
               </ProtectedRoute>
             } />
           </Routes>

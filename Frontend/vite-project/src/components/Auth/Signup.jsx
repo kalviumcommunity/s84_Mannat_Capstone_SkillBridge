@@ -36,6 +36,13 @@ const Signup = () => {
 
   return (
     <div className="auth-container">
+      <div className="auth-bubbles">
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+      </div>
       <div className="auth-card">
         <div className="auth-content">
           <h2>Join SkillBridge</h2>
