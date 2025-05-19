@@ -40,7 +40,11 @@ const Signup = () => {
       });
       navigate('/dashboard');
     } catch (err) {
-      setError(err?.error || err?.message || JSON.stringify(err) || 'Failed to create account');
+      if (err?.message && err.message.toLowerCase().includes('econnreset')) {
+        setError('Invalid email.');
+      } else {
+        setError(err?.error || err?.message || JSON.stringify(err) || 'Failed to create account');
+      }
     } finally {
       setIsLoading(false);
     }

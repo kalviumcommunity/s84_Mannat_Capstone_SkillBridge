@@ -28,7 +28,11 @@ const Login = () => {
       await login(formData.email, formData.password);
       navigate('/dashboard');
     } catch (error) {
-      setError(error.message || 'Failed to login');
+      if (error?.error === 'Please verify your email before logging in.') {
+        setError('Check your mail for verification.');
+      } else {
+        setError(error.message || 'Failed to login');
+      }
     } finally {
       setIsLoading(false);
     }
