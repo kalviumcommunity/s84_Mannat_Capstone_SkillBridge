@@ -5,7 +5,8 @@ const User = require('../Models/userModel');
 
 const signup = async (req, res) => {
     try {
-        const { fullname, email, phoneNumber, password, role } = req.body;
+        const fullname = req.body.fullname || req.body.name;
+        const { email, phoneNumber = '', password, role = 'jobseeker' } = req.body;
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -23,7 +24,17 @@ const signup = async (req, res) => {
             profile: {}
         });
 
-        res.status(201).json({ message: 'User created successfully', user: newUser });
+        // Generate token for the new user
+        const token = jwt.sign(
+            { id: newUser._id, email: newUser.email, role: newUser.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        const userObj = newUser.toObject();
+        delete userObj.password;
+
+        res.status(201).json({ message: 'User created successfully', token, user: userObj });
     } 
     catch (error) {
         res.status(400).json({ error: error.message });
@@ -51,7 +62,10 @@ const login = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        res.status(200).json({ message: 'Login successful', token });
+        const userObj = user.toObject();
+        delete userObj.password;
+
+        res.status(200).json({ message: 'Login successful', token, user: userObj });
     } 
     catch (error) {
         res.status(400).json({ error: error.message });

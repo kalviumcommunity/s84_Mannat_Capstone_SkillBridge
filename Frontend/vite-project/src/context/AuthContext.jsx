@@ -1,44 +1,51 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { authService } from '../services/authService';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const login = (userData) => {
-    // Mock user data for demonstration
-    const mockUserData = {
-      ...userData,
-      name: userData.name || 'John Doe',
-      bio: 'Passionate developer with expertise in web technologies',
-      skills: ['JavaScript', 'React', 'Node.js', 'Python'],
-      experience: 'Senior Developer at Tech Corp (2020-Present)',
-      education: 'B.Tech in Computer Science',
-      location: 'New York, USA',
-      phone: '+1 234 567 8900',
-      github: 'https://github.com/johndoe',
-      linkedin: 'https://linkedin.com/in/johndoe',
-      website: 'https://johndoe.dev'
-    };
-    setUser(mockUserData);
-    localStorage.setItem('user', JSON.stringify(mockUserData));
+  useEffect(() => {
+    const storedUser = authService.getCurrentUser();
+    if (storedUser) {
+      setUser(storedUser);
+    }
+    setLoading(false);
+  }, []);
+
+  const login = async (email, password) => {
+    try {
+      const response = await authService.login(email, password);
+      setUser(response.user);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const signup = async (userData) => {
+    try {
+      const response = await authService.signup(userData);
+      setUser(response.user);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = () => {
+    authService.logout();
     setUser(null);
-    localStorage.removeItem('user');
   };
 
-  // Check for stored user data on initial load
-  useState(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, signup, logout }}>
       {children}
     </AuthContext.Provider>
   );

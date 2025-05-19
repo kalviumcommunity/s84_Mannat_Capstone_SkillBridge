@@ -7,11 +7,11 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -23,12 +23,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      login(formData);
+      await login(formData.email, formData.password);
       navigate('/dashboard');
     } catch (error) {
-      console.error('Login failed:', error);
+      setError(error.message || 'Failed to login');
     } finally {
       setIsLoading(false);
     }
@@ -45,18 +45,9 @@ const Login = () => {
           <h2>Welcome Back</h2>
           <p className="auth-subtitle">Continue your professional journey with SkillBridge</p>
 
+          {error && <div className="auth-error">{error}</div>}
+
           <form onSubmit={handleSubmit} className="auth-form">
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Full Name"
-                required
-              />
-              <div className="form-highlight"></div>
-            </div>
             <div className="form-group">
               <input
                 type="email"

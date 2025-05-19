@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const userRoute = require('./Routes/userRoutes');
 const authRoute = require('./Routes/authRoutes');
@@ -9,6 +10,11 @@ const Job = require('./Models/jobModel');
 const app = express();
 app.use(express.json());
 
+// Add CORS middleware before routes
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 require('dotenv').config();
 const port = process.env.PORT || 9090;
@@ -20,7 +26,6 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((err)=>{
     console.log(err);
 })
-
 
 app.use('/route', userRoute);
 app.use('/route/auth', authRoute);

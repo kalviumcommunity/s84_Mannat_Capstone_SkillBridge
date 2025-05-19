@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +14,7 @@ const Signup = () => {
     role: 'jobseeker' // or 'employer'
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -22,12 +26,24 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
       return;
     }
     setIsLoading(true);
-    // Add your signup logic here
-    setIsLoading(false);
+    setError('');
+    try {
+      await signup({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role
+      });
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err?.error || err?.message || JSON.stringify(err) || 'Failed to create account');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleSignup = () => {
@@ -47,6 +63,8 @@ const Signup = () => {
         <div className="auth-content">
           <h2>Join SkillBridge</h2>
           <p className="auth-subtitle">Connect with opportunities that match your true potential</p>
+
+          {error && <div className="auth-error">{error}</div>}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
