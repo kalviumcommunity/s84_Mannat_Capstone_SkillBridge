@@ -12,9 +12,14 @@ const jwt = require('jsonwebtoken');
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = [
+  'http://localhost:5173', // or your local frontend port
+  'https://s84-mannat-skillbridge.netlify.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
 }));
 
 app.use(session({
