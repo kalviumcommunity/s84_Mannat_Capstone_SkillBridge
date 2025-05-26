@@ -5,7 +5,7 @@ import { signInWithPopup } from 'firebase/auth';
 export const authService = {
   async login(email, password) {
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post('/route/auth/login', { email, password });
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -18,7 +18,7 @@ export const authService = {
 
   async signup(userData) {
     try {
-      const response = await api.post('/auth/signup', userData);
+      const response = await api.post('/route/auth/signup', userData);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));

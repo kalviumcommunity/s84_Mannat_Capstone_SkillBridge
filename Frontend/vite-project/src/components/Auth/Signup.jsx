@@ -34,7 +34,7 @@ const Signup = () => {
     setCodeMsg('');
     setError('');
     try {
-      await api.post('/auth/send-code', { email: formData.email });
+      await api.post('route/auth/send-code', { email: formData.email });
       setCodeSent(true);
       setCodeMsg('Verification code sent to your email.');
     } catch (err) {

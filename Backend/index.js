@@ -13,12 +13,20 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  'http://localhost:5173', // or your local frontend port
+  'http://localhost:5173',
   'https://s84-mannat-skillbridge.netlify.app'
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
@@ -41,7 +49,10 @@ app.get('/route/auth/google/callback', passport.authenticate('google', { failure
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    const redirectUrl = `http://localhost:5173/dashboard?token=${token}`;
+    const frontendUrl =
+      process.env.FRONTEND_URL || 'http://localhost:5173';
+
+    const redirectUrl = `${frontendUrl}/dashboard?token=${token}`;
     res.redirect(redirectUrl);
   }
 );
