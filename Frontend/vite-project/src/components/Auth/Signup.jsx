@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import api from '../../services/api';
 import './Auth.css';
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL
+
 const Signup = () => {
   const navigate = useNavigate();
   const { signup, loginWithGoogle } = useAuth();
@@ -34,7 +36,7 @@ const Signup = () => {
     setCodeMsg('');
     setError('');
     try {
-      await api.post('route/auth/send-code', { email: formData.email });
+      await api.post(`${baseUrl}/route/auth/send-code`, { email: formData.email });
       setCodeSent(true);
       setCodeMsg('Verification code sent to your email.');
     } catch (err) {

@@ -6,6 +6,7 @@ import Signup from './components/Auth/Signup'
 import Dashboard from './components/Dashboard/Dashboard'
 import Footer from './components/Footer/Footer'
 import Learning from './components/Learning/Learning'
+import Skill from './components/SkillValidation/Skill'
 import Profile from './components/Profile/Profile'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
@@ -48,6 +49,11 @@ function App() {
             <Route path="/learn" element={
               <ProtectedRoute>
                 <Learning />
+              </ProtectedRoute>
+            } />
+            <Route path='/skills' element={
+              <ProtectedRoute>
+                <Skill />
               </ProtectedRoute>
             } />
           </Routes>

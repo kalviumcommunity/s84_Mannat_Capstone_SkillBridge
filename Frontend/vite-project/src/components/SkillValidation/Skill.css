@@ -1,0 +1,103 @@
+.skills-container {
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #111111, #1a1a1a);
+  min-height: 100vh;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.skill-card {
+  background: linear-gradient(145deg, #222, #111);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00ffcc;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  transform: scale(1);
+}
+
+.skill-card:hover {
+  background: #00ffcc22;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffcc88;
+  color: #fff;
+}
+
+.quiz-section {
+  max-width: 700px;
+  margin: auto;
+  padding: 3rem 2rem;
+  background: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+.question {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.options button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #222;
+  color: #00ffcc;
+  border: 2px solid #00ffcc33;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.options button:hover {
+  background: #00ffcc22;
+  color: #fff;
+  border-color: #00ffcc;
+}
+
+.progress {
+  text-align: right;
+  color: #aaa;
+  margin-top: 1rem;
+}
+
+.back-btn {
+  background: #00ffcc;
+  color: #111;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #00ccaa;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
