@@ -1,0 +1,25 @@
+meta {
+  name: Put-request
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:5000/route/user/685ee224427116b737e9c1e7
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmJhMDgyMjBkM2U4ZTY5YzBiODIzMyIsImVtYWlsIjoibWFubmF0Z2FyZzIwMDZAZ21haWwuY29tIiwicm9sZSI6ImpvYnNlZWtlciIsImlhdCI6MTc1MTA0NzcwMywiZXhwIjoxNzUxMDUxMzAzfQ.N_UFEjGsuDO_DP6SpUL1zbr8ZyY0cVHN_nZkgv-i-5w
+}
+
+body:json {
+  {
+    "fullname" : "Anu",
+    "email" : "anu1@gmail.com",
+    "phoneNumber" : "9876543210",
+    "password" : "anu123",
+    "role" : "employer"
+  }
+}

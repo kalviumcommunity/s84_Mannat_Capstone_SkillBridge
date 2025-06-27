@@ -1,0 +1,15 @@
+meta {
+  name: Get-request
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:5000/route/user
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MmJhMDgyMjBkM2U4ZTY5YzBiODIzMyIsImVtYWlsIjoibWFubmF0Z2FyZzIwMDZAZ21haWwuY29tIiwicm9sZSI6ImpvYnNlZWtlciIsImlhdCI6MTc1MTA0NzcwMywiZXhwIjoxNzUxMDUxMzAzfQ.N_UFEjGsuDO_DP6SpUL1zbr8ZyY0cVHN_nZkgv-i-5w
+}
